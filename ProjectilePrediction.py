@@ -1,6 +1,6 @@
 import math
 
-def main():
+"""def main():
 	print("Welcome to the Physics PyCalc!")
 	choice = input("What type of physics would you like to calculate?:")
 	print("[Projectiles/Friction]")
@@ -8,8 +8,8 @@ def main():
 	if(choice == "projectiles" or "Projectiles"):
 		Projectiles()
 
-	#if(choice == "friction" or "Friction"):
-		#Friction()
+	if(choice == "friction" or "Friction"):
+		Friction()"""
 
 def Projectiles():
 	"""Asks for specifics of the problem, hight, distance, time, velocity etc."""
@@ -197,4 +197,4 @@ def answers():
 # Python is a scripting language, meaning that it runs line by line instead of being compiled like java, C, C#, or almost any 
 # other programming language out there. Because of this, we can only call a function after it's read over the function, so we
 # call the function at the bottom of the script, so the computer has a chance to read over everything.
-main()
+projectiles()
