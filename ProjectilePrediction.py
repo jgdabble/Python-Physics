@@ -1,65 +1,47 @@
 import math
 
-"""def main():
-	print("Welcome to the Physics PyCalc!")
-	choice = input("What type of physics would you like to calculate?:")
-	print("[Projectiles/Friction]")
+"""Asks for specifics of the problem, hight, distance, time, velocity etc."""
+lengthunits = input("Are you using meters or feet?")
+print("-------------------------------------------------------------------------------------------------")
+timeunits = input("Are you using seconds, minutes, or hours?")
+print("-------------------------------------------------------------------------------------------------")
+height = input("Enter the height that your projectile is fired from. If you are not given the hight, enter X.")
+print("-------------------------------------------------------------------------------------------------")
+distance = input("Enter the distance that your projectile flies before landing. If you are not given the distance, enter X.")
+print("-------------------------------------------------------------------------------------------------")
+time = input("Enter the total flight time of your projectile. If you are not given the time, enter X.")
+print("-------------------------------------------------------------------------------------------------")
+launchAngle = input("Enter the angle from the horizontal of the projectile at launch. If you are not given the angle, enter X.")
+print("-------------------------------------------------------------------------------------------------")
+velocity = input("Enter the velocity that your projectile is being fired at. If you are not given the velocity, enter X.")
+print("-------------------------------------------------------------------------------------------------")
+gravity = input("What acceleration is gravity? [10/9.8] :")
 
-	if(choice == "projectiles" or "Projectiles"):
-		Projectiles()
+# Because user input is saved as a string, this part converts each variable from a string to a float.
+if(height != "x" and "X"):
+	height = float(height)
 
-	if(choice == "friction" or "Friction"):
-		Friction()"""
+if(distance != "x" and "X"):
+	distance = float(distance)
 
-def Projectiles():
-	"""Asks for specifics of the problem, hight, distance, time, velocity etc."""
-	lengthunits = input("Are you using meters or feet?")
-	print("-------------------------------------------------------------------------------------------------")
-	timeunits = input("Are you using seconds, minutes, or hours?")
-	print("-------------------------------------------------------------------------------------------------")
-	height = input("Enter the height that your projectile is fired from. If you are not given the hight, enter X.")
-	print("-------------------------------------------------------------------------------------------------")
-	distance = input("Enter the distance that your projectile flies before landing. If you are not given the distance, enter X.")
-	print("-------------------------------------------------------------------------------------------------")
-	time = input("Enter the total flight time of your projectile. If you are not given the time, enter X.")
-	print("-------------------------------------------------------------------------------------------------")
-	launchAngle = input("Enter the angle from the horizontal of the projectile at launch. If you are not given the angle, enter X.")
-	print("-------------------------------------------------------------------------------------------------")
-	velocity = input("Enter the velocity that your projectile is being fired at. If you are not given the velocity, enter X.")
-	print("-------------------------------------------------------------------------------------------------")
-	gravity = input("What acceleration is gravity? [10/9.8] :")
+if(velocity != "x" and "X"):
+	velocity = float(velocity)
 
-	# Because user input is saved as a string, this part converts each variable from a string to a float.
-	# Float is short for Floating Point Decimal, which can be used in the same context as integer variables, but isn't restricted
-	# to whole numbers like integers are.
-	if(height != "x" and "X"):
-		height = float(height)
+if(launchAngle != "x" and "X"):
+	launchAngle = float(launchAngle)
 
-	if(distance != "x" and "X"):
-		distance = float(distance)
+if(time != "x" and "X"):
+	time = float(time)
 
-	if(velocity != "x" and "X"):
-		velocity = float(velocity)
+gravity = float(gravity)
 
-	if(launchAngle != "x" and "X"):
-		launchAngle = float(launchAngle)
-
-	if(time != "x" and "X"):
-		time = float(time)
-
-	gravity = float(gravity)
-
-	componentdesision()
-
-# Any line beginning with def defines a new function, which can be called later if required.
-def componentdesision():
+def main():
 	global launchAngle
 	global height
 	global time
 	global distance
 	global velocity
-	# In Python, indentation is how code is organized into branches.
-	# this is the main function, this code will only be executed if main is called.
+
 	if(launchAngle != 0):
 		angled()
 
@@ -76,17 +58,19 @@ def vertical():
 	global time
 	global gravity
 
-	if(height == "x"):
-		# The math formula for height, in case it isn't given in the problem.
-		height = (.5 * gravity) * (time ** 2)
-		print ("The height the projectile was fired from is: " + str(height) + " meters.")
-	
-	if(time == "x"):
-		# The math formula for time, in case it isn't given in the problem, like in the lab.
+	print(height)
+
+	if(time == "x" or "X"):
+		
 		time = (height / (.5 * gravity)) ** .5
 		print ("The total flight time of the projectile is: " + str(time) + " seconds.")
 
-	if(distance or velocity == "x"):
+	if(height == "x" or "X"):
+		
+		height = (.5 * gravity) * (time ** 2)
+		print ("The height the projectile was fired from is: " + str(height) + " meters.")
+
+	if(distance or velocity == "x" or "X"):
 		# This checks to see if anything else needs to be calculated, if not, then it will go to the answers function.
 		horizontal()
 
@@ -99,22 +83,16 @@ def horizontal():
 	global time
 	global distance
 
-	if(time == "x" or "X"):
-		# This is just a fail safe, because time is nessessary for these equations, it checks to make sure that we actually have 
-		# the value of time.
-		vertical()
-
 	if(velocity == "x"):
-		# This calculates the velocity of the projectile just after shooting.
-		velocity = 2 * (distance / time)
+		
+		velocity = distance / time
 		print("The velocity of the projectile is: " + str(velocity) + " Meters per Second.")
 
 	if(distance == "x"):
-		# This calculates the distance the projectile will travel, in case it's not given in the problem.
+		
 		distance = (.5 * velocity) * time
 		print("The horizontal distance of the projectile is: " + str(distance) + " meters.")
 
-	# After everything is calculated and we have numerical values for every argument, the answers function is called.
 	answers()
 
 def angled():
@@ -188,13 +166,10 @@ def answers():
 	print("------------------------------------------------------------|")
 	print("and the projectile had a total flight time of: " + str(time) + timeunits)
 
-"""def Friction():
+def Friction():
 	mass = input("What is the mass of the object in question?")
 	surfaceangle = input("What angle is the surface at?")
 	netforce = input("What is the net force exerted on the object? (Up and to the Right are Positive(+)")
 	friction = input("What is the force of friction?")
-"""
-# Python is a scripting language, meaning that it runs line by line instead of being compiled like java, C, C#, or almost any 
-# other programming language out there. Because of this, we can only call a function after it's read over the function, so we
-# call the function at the bottom of the script, so the computer has a chance to read over everything.
-projectiles()
+
+main()
